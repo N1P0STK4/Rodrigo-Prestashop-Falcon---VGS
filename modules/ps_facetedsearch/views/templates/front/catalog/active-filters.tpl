@@ -22,27 +22,49 @@
  * @copyright Since 2007 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  *}
-<section id="js-active-search-filters">
+<section
+  id="js-active-search-filters"
+  class="active-search-filters"
+>
   {if $activeFilters|count}
-    <div class="card mb-3">
-      <div class="card-header">
-        {block name='active_filters_title'}
-          <p class="h5 card-title mb-0">{l s='Active filters' d='Shop.Theme.Global'}</p>
-        {/block}
-      </div>
-      <div class="card-body">
-        <ul class="row m-n1">
-          {foreach from=$activeFilters item="filter"}
-            {block name='active_filters_item'}
-              <li class="col flex-grow-0 flex-shrink-0 p-1">
-                <a class="text-nowrap btn btn-outline-secondary btn-sm js-search-link d-flex align-items-center" href="{$filter.nextEncodedFacetsURL}" rel="nofollow">
-                  {l s='%1$s:' d='Shop.Theme.Catalog' sprintf=[$filter.facetLabel]} {$filter.label} <i class="material-icons font-reset ml-1 align-middle">&#xE14C;</i>
-                </a>
-              </li>
-            {/block}
-          {/foreach}
-        </ul>
-      </div>
+    <div class="active-search-filters__inner">
+
+      {block name='active_filters_title'}
+        <p class="active-search-filters__title">
+          {l s='Active filters' d='Shop.Theme.Global'}
+        </p>
+      {/block}
+
+      <ul class="active-search-filters__list">
+        {foreach from=$activeFilters item="filter"}
+          {block name='active_filters_item'}
+            <li class="active-search-filters__item">
+              <a
+                class="active-search-filters__link js-search-link"
+                href="{$filter.nextEncodedFacetsURL}"
+                rel="nofollow"
+              >
+                <span class="active-search-filters__text">
+                  {l
+                    s='%1$s:'
+                    d='Shop.Theme.Catalog'
+                    sprintf=[$filter.facetLabel]
+                  }
+                  {$filter.label}
+                </span>
+
+                <span
+                  class="active-search-filters__remove"
+                  aria-hidden="true"
+                >
+                  ×
+                </span>
+              </a>
+            </li>
+          {/block}
+        {/foreach}
+      </ul>
+
     </div>
   {/if}
 </section>

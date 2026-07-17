@@ -43,92 +43,89 @@
             </div>
           {/if}
         {/block}
+        
         {foreach from=$displayedFacets item="facet"}
 
-          {assign var=_expand_id value=10|mt_rand:100000}
-          {assign var=_collapse value=true}
-          {foreach from=$facet.filters item="filter"}
-            {if $filter.active}{assign var=_collapse value=false}{/if}
-          {/foreach}
-          <section class="search-filters__block list-group-item">
-            <div class="search-filters__header d-flex justify-content-between align-items-center mb-0 h5 position-relative">
-              <span class="search-filters__title mb-0">{$facet.label}</span>
-              {if $facet.widgetType != 'slider'}
-                <a href="#facet_{$_expand_id}" class="icon-collapse stretched-link text-reset d-block" data-toggle="collapse"
-                  {if !$_collapse} aria-expanded="true" {/if}>
-                  <span class="material-icons">&#xE313;</span>
-                </a>
-              {/if}
-            </div>
+          {if $facet.type == 'category'}
 
-            {if in_array($facet.widgetType, ['radio', 'checkbox'])}
-              {block name='facet_item_other'}
-                <div id="facet_{$_expand_id}" class="search-filters__collapse collapse{if !$_collapse} show{/if}">
+            {assign var=_expand_id value=10|mt_rand:100000}
+            {assign var=_collapse value=false}
+
+            {foreach from=$facet.filters item="filter"}
+              {if $filter.active}
+                {assign var=_collapse value=false}
+              {/if}
+            {/foreach}
+
+            <section class="search-filters__block list-group-item">
+              <div class="search-filters__header d-flex justify-content-between align-items-center mb-0 h5 position-relative">
+                <span class="search-filters__title mb-0">
+                  {$facet.label}
+                </span>
+
+                {if $facet.widgetType != 'slider'}
+                  <a
+                    href="#facet_{$_expand_id}"
+                    class="icon-collapse stretched-link text-reset d-block"
+                    data-toggle="collapse"
+                    {if !$_collapse}aria-expanded="true"{/if}
+                  >
+                    <span class="material-icons">&#xE313;</span>
+                  </a>
+                {/if}
+              </div>
+
+              {if in_array($facet.widgetType, ['radio', 'checkbox'])}
+                <div
+                  id="facet_{$_expand_id}"
+                  class="search-filters__collapse collapse{if !$_collapse} show{/if}"
+                >
                   {foreach from=$facet.filters key=filter_key item="filter"}
                     {if !$filter.displayed}
                       {continue}
                     {/if}
+
                     <div class="py-1 {if $filter@first}pt-2{/if}">
-                      <div
-                        class="custom-control custom-{if $facet.multipleSelectionAllowed}checkbox{if isset($filter.properties.color) || isset($filter.properties.texture)}-color{/if}{else}radio{/if}">
-                        <input id="facet_input_{$_expand_id}_{$filter_key}" data-search-url="{$filter.nextEncodedFacetsURL}"
-                          type="{if $facet.multipleSelectionAllowed}checkbox{else}radio{/if}" class="custom-control-input"
-                          {if $filter.active } checked{/if}>
-                        <label for="facet_input_{$_expand_id}_{$filter_key}" {if isset($filter.properties.color)}
-                            class="custom-control-label custom-control-label-{if Tools::getBrightness($filter.properties.color) > 128}dark{else}bright{/if}"
-                          {else} class="custom-control-label"
-                          {/if}>
-                          {if isset($filter.properties.color)}
-                            <span class="custom-control-input-color" style="background-color:{$filter.properties.color}"></span>
-                          {elseif isset($filter.properties.texture)}
-                            <span class="custom-control-input-color texture"
-                              style="background-image:url({$filter.properties.texture})"></span>
-                          {/if}
+                      <div class="custom-control custom-{if $facet.multipleSelectionAllowed}checkbox{else}radio{/if}">
+                        <input
+                          id="facet_input_{$_expand_id}_{$filter_key}"
+                          data-search-url="{$filter.nextEncodedFacetsURL}"
+                          type="{if $facet.multipleSelectionAllowed}checkbox{else}radio{/if}"
+                          class="custom-control-input"
+                          {if $filter.active}checked{/if}
+                        >
+
+                        <label
+                          for="facet_input_{$_expand_id}_{$filter_key}"
+                          class="custom-control-label"
+                        >
                           {$filter.label}
-                          {*{if $filter.magnitude and $show_quantities}*}
-                            {*<span class="magnitude">({$filter.magnitude})</span>*}
-                          {*{/if}*}
                         </label>
                       </div>
                     </div>
                   {/foreach}
                 </div>
-              {/block}
 
-            {elseif $facet.widgetType == 'dropdown'}
-              {block name='facet_item_dropdown'}
-                <div id="facet_{$_expand_id}" class="search-filters__collapse collapse{if !$_collapse} show{/if}">
-                  <div class="py-1 {if $filter@first}pt-2{/if}">
-                    <select class="custom-select" data-action="search-select">
-                      {if $_collapse}
-                        <option value="">---</option>
-                      {/if}
-                      {foreach from=$facet.filters item="filter"}
-                        <option data-href="{$filter.nextEncodedFacetsURL}" {if $filter.active} selected="selected" {/if}>
-                          {$filter.label}
-                          {if $filter.magnitude and $show_quantities}
-                            ({$filter.magnitude})
-                          {/if}
-                        </option>
-                      {/foreach}
-                    </select>
-                  </div>
-                </div>
-              {/block}
+              {elseif $facet.widgetType == 'slider'}
 
-            {elseif $facet.widgetType == 'slider'}
-              {block name='facet_item_slider'}
                 {foreach from=$facet.filters item="filter"}
-
                   <div class="py-1 {if $filter@first}pt-2{/if}">
                     <div id="facet_{$_expand_id}" class="search-filters__slider">
                       <div class="js-input-range-slider-container">
-                        <div class="js-range-slider mt-1" data-slider-min="{$facet.properties.min}"
-                          data-slider-max="{$facet.properties.max}" data-slider-id="{$_expand_id}"
-                          data-slider-values="{$filter.value|@json_encode}" data-slider-unit="{$facet.properties.unit}"
+
+                        <div
+                          class="js-range-slider mt-1"
+                          data-slider-min="{$facet.properties.min}"
+                          data-slider-max="{$facet.properties.max}"
+                          data-slider-id="{$_expand_id}"
+                          data-slider-values="{$filter.value|@json_encode}"
+                          data-slider-unit="{$facet.properties.unit}"
                           data-slider-label="{$facet.label}"
                           data-slider-specifications="{$facet.properties.specifications|@json_encode}"
-                          data-slider-encoded-url="{$filter.nextEncodedFacetsURL}" id="slider-range_{$_expand_id}"></div>
+                          data-slider-encoded-url="{$filter.nextEncodedFacetsURL}"
+                          id="slider-range_{$_expand_id}"
+                        ></div>
+
                         <div class="d-flex mt-3 mx-n2">
                           <div class="px-2 search-filters__input-group">
                             <input
@@ -141,8 +138,9 @@
                               {/if}
                               data-unit="{$facet.properties.unit}"
                               data-action="range-from"
-                              >
+                            >
                           </div>
+
                           <div class="px-2 ml-auto search-filters__input-group">
                             <input
                               class="js-input-range-slider form-control form-control-sm text-center search-filters__input"
@@ -154,16 +152,140 @@
                               {/if}
                               data-unit="{$facet.properties.unit}"
                               data-action="range-to"
-                              >
+                            >
                           </div>
                         </div>
+
                       </div>
                     </div>
                   </div>
                 {/foreach}
-              {/block}
-            {/if}
-          </section>
+
+              {/if}
+            </section>
+          {/if}
+        {/foreach}
+
+        {foreach from=$displayedFacets item="facet"}
+
+          {if $facet.widgetType == 'slider'}
+
+            {assign var=_expand_id value=10|mt_rand:100000}
+            {assign var=_collapse value=false}
+
+            {foreach from=$facet.filters item="filter"}
+              {if $filter.active}
+                {assign var=_collapse value=false}
+              {/if}
+            {/foreach}
+
+            <section class="search-filters__block list-group-item">
+              <div class="search-filters__header d-flex justify-content-between align-items-center mb-0 h5 position-relative">
+                <span class="search-filters__title mb-0">
+                  {$facet.label}
+                </span>
+
+                {if $facet.widgetType != 'slider'}
+                  <a
+                    href="#facet_{$_expand_id}"
+                    class="icon-collapse stretched-link text-reset d-block"
+                    data-toggle="collapse"
+                    {if !$_collapse}aria-expanded="true"{/if}
+                  >
+                    <span class="material-icons">&#xE313;</span>
+                  </a>
+                {/if}
+              </div>
+
+              {if in_array($facet.widgetType, ['radio', 'checkbox'])}
+                <div
+                  id="facet_{$_expand_id}"
+                  class="search-filters__collapse collapse{if !$_collapse} show{/if}"
+                >
+                  {foreach from=$facet.filters key=filter_key item="filter"}
+                    {if !$filter.displayed}
+                      {continue}
+                    {/if}
+
+                    <div class="py-1 {if $filter@first}pt-2{/if}">
+                      <div class="custom-control custom-{if $facet.multipleSelectionAllowed}checkbox{else}radio{/if}">
+                        <input
+                          id="facet_input_{$_expand_id}_{$filter_key}"
+                          data-search-url="{$filter.nextEncodedFacetsURL}"
+                          type="{if $facet.multipleSelectionAllowed}checkbox{else}radio{/if}"
+                          class="custom-control-input"
+                          {if $filter.active}checked{/if}
+                        >
+
+                        <label
+                          for="facet_input_{$_expand_id}_{$filter_key}"
+                          class="custom-control-label"
+                        >
+                          {$filter.label}
+                        </label>
+                      </div>
+                    </div>
+                  {/foreach}
+                </div>
+
+              {elseif $facet.widgetType == 'slider'}
+
+                {foreach from=$facet.filters item="filter"}
+                  <div class="py-1 {if $filter@first}pt-2{/if}">
+                    <div id="facet_{$_expand_id}" class="search-filters__slider">
+                      <div class="js-input-range-slider-container">
+
+                        <div
+                          class="js-range-slider mt-1"
+                          data-slider-min="{$facet.properties.min}"
+                          data-slider-max="{$facet.properties.max}"
+                          data-slider-id="{$_expand_id}"
+                          data-slider-values="{$filter.value|@json_encode}"
+                          data-slider-unit="{$facet.properties.unit}"
+                          data-slider-label="{$facet.label}"
+                          data-slider-specifications="{$facet.properties.specifications|@json_encode}"
+                          data-slider-encoded-url="{$filter.nextEncodedFacetsURL}"
+                          id="slider-range_{$_expand_id}"
+                        ></div>
+
+                        <div class="d-flex mt-3 mx-n2">
+                          <div class="px-2 search-filters__input-group">
+                            <input
+                              class="js-input-range-slider form-control form-control-sm text-center search-filters__input"
+                              type="text"
+                              {if $facet.filters.0.value}
+                                value="{$facet.filters.0.value.0}"
+                              {else}
+                                value="{$facet.properties.min}"
+                              {/if}
+                              data-unit="{$facet.properties.unit}"
+                              data-action="range-from"
+                            >
+                          </div>
+
+                          <div class="px-2 ml-auto search-filters__input-group">
+                            <input
+                              class="js-input-range-slider form-control form-control-sm text-center search-filters__input"
+                              type="text"
+                              {if $facet.filters.0.value}
+                                value="{$facet.filters.0.value.1}"
+                              {else}
+                                value="{$facet.properties.max}"
+                              {/if}
+                              data-unit="{$facet.properties.unit}"
+                              data-action="range-to"
+                            >
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                {/foreach}
+
+              {/if}
+            </section>
+          {/if}
         {/foreach}
 
       </div>

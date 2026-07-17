@@ -2,11 +2,16 @@
 
 .search-form {
   position: relative;
-  max-width: rem-calc(620px);
+  width: 100%;
+  max-width: rem-calc(563px);
   margin: 0 auto;
 
   &__form-group {
     position: relative;
+    display: flex;
+    width: 100%;
+    height: rem-calc(30px);
+
     @include media-breakpoint-up(md) {
       .search-result-open & {
         z-index: 101;
@@ -15,18 +20,28 @@
   }
 
   &__input {
-    height: $search-input-height;
-    padding: 0 rem-calc(70px) 0 rem-calc(30px);
-    line-height: $search-input-height;
+    width: 100%;
+    height: rem-calc(30px);
+    padding: 0 rem-calc(58px) 0 rem-calc(10px);
+    font-size: rem-calc(12px);
+    line-height: rem-calc(30px);
     color: $gray-900;
-    border-width: 1px;
-    border-radius: 99em;
+    background-color: #fff;
+    border: rem-calc(2px) solid #328189;
+    border-radius: rem-calc(5px);
 
-    &:focus {
-      background: $gray-100;
-      box-shadow: none;
+    &::placeholder {
+      color: #328189;
+      opacity: 1;
     }
 
+    &:focus {
+      color: $gray-900;
+      background-color: #fff;
+      border-color: #328189;
+      outline: 0;
+      box-shadow: none;
+    }
   }
 
   &__btn {
@@ -34,21 +49,25 @@
     top: 0;
     right: 0;
     bottom: 0;
-    padding: 0 map.get($spacers, 3);
-    line-height: 1;
-    color: $primary;
-  }
-}
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: rem-calc(48px);
+    padding: 0;
+    color: #fff;
+    background-color: #328189;
+    border: 0;
+    border-radius: 0 rem-calc(5px) rem-calc(5px) 0;
 
-.search-modal {
-  .modal-body {
-    padding-top: rem-calc(40px);
-  }
+    .material-icons {
+      font-size: rem-calc(18px);
+    }
 
-  .close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: rem-calc(7px) rem-calc(10px);
+    &:hover,
+    &:focus {
+      color: #fff;
+      background-color: darken(#328189, 6%);
+      box-shadow: none;
+    }
   }
 }

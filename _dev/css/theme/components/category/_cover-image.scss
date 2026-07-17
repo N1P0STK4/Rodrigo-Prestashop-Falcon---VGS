@@ -1,0 +1,15 @@
+@use "sass:map";
+
+.category-cover {
+    width: 100%;
+    height: 206px;
+    overflow: hidden;
+
+    img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top center;
+    }
+}

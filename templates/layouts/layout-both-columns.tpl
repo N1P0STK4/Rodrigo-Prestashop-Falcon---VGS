@@ -42,7 +42,7 @@
         {include file='catalog/_partials/product-activation.tpl'}
       {/block}
 
-      <header id="header" class="l-header">
+      <header id="header">
         {block name='header'}
           {include file='_partials/header.tpl'}
         {/block}
@@ -55,19 +55,44 @@
         {/block}
 
         {hook h="displayWrapperTop"}
-        <div class="container">
-          {block name='breadcrumb'}
-            {include file='_partials/breadcrumb.tpl'}
-          {/block}
 
+        {block name='breadcrumb'}
+          {include file='_partials/breadcrumb.tpl'}
+        {/block}
+
+        {if $page.page_name == 'category' && isset($category.id)}
+          <div class="category-cover">
+            <img
+              src="{$urls.img_cat_url}{$category.id}.jpg"
+              alt="{$category.name|escape:'html':'UTF-8'}"
+            >
+          </div>
+
+          <div class="category-heading">
+            <div class="container">
+              <img
+                src="{$urls.img_cat_url}{$category.id}-0_thumb.jpg"
+                alt="{$category.name|escape:'html':'UTF-8'}"
+                class="category-menu-thumbnail"
+                loading="lazy"
+              >
+
+              <h1>{$category.name|escape:'html':'UTF-8'}</h1>
+            </div>
+          </div>
+        {/if}
+
+        <div class="container">
           <div class="row">
             {block name="left_column"}
               <div id="left-column" class="col-12 col-md-4 col-lg-3">
-                {if $page.page_name == 'product'}
-                  {hook h='displayLeftColumnProduct' product=$product category=$category}
-                {else}
-                  {hook h="displayLeftColumn"}
-                {/if}
+              <div class="category-filters">
+                  {if $page.page_name == 'product'}
+                    {hook h='displayLeftColumnProduct' product=$product category=$category}
+                  {else}
+                    {hook h="displayLeftColumn"}
+                  {/if}
+                </div>
               </div>
             {/block}
 
