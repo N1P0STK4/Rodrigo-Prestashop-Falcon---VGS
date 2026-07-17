@@ -98,14 +98,6 @@
                   {/if}
                 </div>
 
-                <div class="swiper-button-prev swiper-button-custom">
-                  <span class="sr-only">{l s='Previous' d='Shop.Theme.Actions'}</span>
-                  <span class="material-icons">keyboard_arrow_left</span>
-                </div>
-                <div class="swiper-button-next swiper-button-custom">
-                  <span class="sr-only">{l s='Next' d='Shop.Theme.Actions'}</span>
-                  <span class="material-icons">keyboard_arrow_right</span>
-                </div>
               </div>
             {/images_block}
           {else}
@@ -123,10 +115,6 @@
                 {/if}>
             {/images_block}
           {/if}
-
-          <a class="product-main-images__modal-trigger-layer btn btn-light shadow rounded-circle hidden-sm-down" data-toggle="modal" data-target="#product-modal">
-            <span class="material-icons font-reset line-height-reset">zoom_in</span>
-          </a>
 
         </div>
       {else}

@@ -27,6 +27,9 @@
 
     {block name='product_quantity'}
       <div class="product-quantity row mb-1 mx-n1 mt-n2 align-items-center">
+        <div class="product-quantity__label">
+          {l s='Cantidad:' d='Shop.Theme.Catalog'}
+        </div>
         <div class="qty col-12 col-sm-auto mx-auto mt-2 px-1">
           <input
             type="number"

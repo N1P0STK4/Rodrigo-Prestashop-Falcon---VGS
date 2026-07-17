@@ -1,0 +1,25 @@
+@use "sass:map";
+
+.product-thumbs {
+  .product-thumbs__elem {
+    width: 88px !important;
+    height: 88px;
+    flex: 0 0 88px;
+    margin:0 !important;
+    margin-right: 10px !important;
+    padding: 0 !important;
+
+    &:first-child {
+      margin-left: 5px !important;
+    }
+
+    img {
+      width: 88px;
+      height: 88px;
+      object-fit: cover;
+      border: 1px solid #328189;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+  }
+}
