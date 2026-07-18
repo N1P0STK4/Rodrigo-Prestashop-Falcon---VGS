@@ -1,7 +1,7 @@
 {block name='product_tabs'}
   {if $product.description}
-    <section class="product-information">
 
+    <section class="product-information">
       <h2 class="product-information__title">
         {l s='Información del producto' d='Shop.Theme.Catalog'}
       </h2>
@@ -13,7 +13,7 @@
           </div>
         {/cms_images_block}
       {/block}
-
     </section>
+
   {/if}
 {/block}

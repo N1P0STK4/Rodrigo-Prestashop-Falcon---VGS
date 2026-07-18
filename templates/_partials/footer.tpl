@@ -22,6 +22,7 @@
  * @copyright Since 2007 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  *}
+ 
 <div class="container">
   <div class="row">
     {block name='hook_footer_before'}
@@ -29,17 +30,19 @@
     {/block}
   </div>
 </div>
+
 <div class="footer-container">
   <div class="container">
-    <div class="row">
+    <div class="row footer__main">
       {block name='hook_footer'}
         {hook h='displayFooter'}
       {/block}
     </div>
-    <div class="row">
-      {block name='hook_footer_after'}
-        {hook h='displayFooterAfter'}
-      {/block}
+  </div>
+
+  <div class="copyright">
+    <div class="copyright__label">
+      Todos los derechos reservados - Desarrollado por VGS
     </div>
   </div>
 </div>

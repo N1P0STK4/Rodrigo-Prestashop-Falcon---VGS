@@ -59,11 +59,9 @@
 
 {block name='head' prepend}
   {if $product.default_image}
-    <link
-      rel="preload"
-      href="{$product.default_image.bySize.large_default.url}"
-      as="image"
-    >
+
+    <link rel="preload" href="{$product.default_image.bySize.large_default.url}" as="image">
+
   {/if}
 {/block}
 
@@ -77,14 +75,17 @@
             <div class="product-main__gallery-container">
               {block name='page_content'}
                 <div class="product-main__gallery-content position-relative">
-
                   <div class="product-main__flags">
+
                     {include file='catalog/_partials/product-flags.tpl'}
+
                   </div>
 
                   {block name='product_cover_thumbnails'}
                     <div class="product-main__media">
+
                       {include file='catalog/_partials/product-cover-thumbnails.tpl'}
+
                     </div>
                   {/block}
                 </div>
@@ -101,7 +102,9 @@
                 {block name='page_header'}
                   <h1 class="product-summary__title h1">
                     {block name='page_title'}
+                    
                       {$product.name}
+
                     {/block}
                   </h1>
                 {/block}
@@ -109,32 +112,30 @@
               </header>
             {/block}
             <div class="product-summary__information product-information">
-
               {block name='product_description_short'}
-                <div
-                  id="product-description-short-{$product.id}"
-                  class="product-summary__description product-description cms-content"
-                >
+                <div id="product-description-short-{$product.id}" class="product-summary__description product-description cms-content">
+
                   {$product.description_short nofilter}
+
                 </div>
               {/block}
 
               {if $product.is_customizable && count($product.customizations.fields)}
                 {block name='product_customization'}
                   <div class="product-summary__customization">
-                    {include
-                      file="catalog/_partials/product-customization.tpl"
-                      customizations=$product.customizations
-                    }
+
+                    {include file="catalog/_partials/product-customization.tpl" customizations=$product.customizations}
+
                   </div>
                 {/block}
               {/if}
 
               <div class="product-summary__meta product-meta">
-
                 <div class="product-meta__item">
                   <span class="product-meta__label">
+
                     {l s='Marca:' d='Shop.Theme.Product'}
+
                   </span>
 
                   <span class="product-meta__value">
@@ -175,12 +176,13 @@
                     {/if}
                   </span>
                 </div>
-
               </div>
 
               {block name='product_prices'}
                 <div class="product-summary__prices">
+
                   {include file='catalog/_partials/product-prices.tpl'}
+
                 </div>
               {/block}
 
@@ -217,35 +219,36 @@
 
                     {block name='product_variants'}
                       <div class="product-summary__variants">
+
                         {include file='catalog/_partials/product-variants.tpl'}
+
                       </div>
                     {/block}
 
                     {block name='product_pack'}
                       {if $packItems}
-                        <section class="product-summary__pack product-pack">
 
+                        <section class="product-summary__pack product-pack">
                           <h2 class="product-pack__title h4">
                             {l s='This pack contains' d='Shop.Theme.Product'}
                           </h2>
 
                           <div class="product-pack__items card-group-vertical mb-4">
-
                             {foreach from=$packItems item="product_pack"}
+
                               {block name='product_miniature'}
                                 <div class="product-pack__item">
-                                  {include
-                                    file='catalog/_partials/miniatures/pack-product.tpl'
-                                    product=$product_pack
-                                    showPackProductsPrice=$product.show_price
-                                  }
+
+                                  {include file='catalog/_partials/miniatures/pack-product.tpl' product=$product_pack showPackProductsPrice=$product.show_price}
+
                                 </div>
                               {/block}
-                            {/foreach}
 
+                            {/foreach}
                           </div>
 
                         </section>
+
                       {/if}
                     {/block}
 
@@ -294,10 +297,9 @@
                 {if isset($product.grouped_features) && $product.grouped_features|count}
 
                   <div class="product-summary__features product-features-grid">
-
                     {foreach from=$product.grouped_features item=feature}
-                      <div class="product-features-grid__item">
 
+                      <div class="product-features-grid__item">
                         <span class="product-features-grid__label">
                           {$feature.name}
                         </span>
@@ -305,10 +307,9 @@
                         <span class="product-features-grid__value">
                           {$feature.value|escape:'htmlall'|nl2br nofilter}
                         </span>
-
                       </div>
-                    {/foreach}
 
+                    {/foreach}
                   </div>
 
                 {/if}
@@ -325,13 +326,9 @@
                   </div>
                 {/if}
               {/block}
-
             </div>
-
           </div>
-
         </div>
-
       </div>
 
       <div class="product-page__tabs">
@@ -346,12 +343,14 @@
 
       {block name='product_accessories'}
         {if $accessories}
+
           <div class="product-page__accessories">
             {include
               file='catalog/_partials/product-accessories.tpl'
               products=$accessories
             }
           </div>
+          
         {/if}
       {/block}
 

@@ -27,23 +27,24 @@
 
     {block name='product_price'}
       <div class="product-price">
-
-
         <div>
           <span class="price price--lg">
             {capture name='custom_price'}{hook h='displayProductPriceBlock' product=$product type='custom_price' hook_origin='product_sheet'}{/capture}
+            
             {if '' !== $smarty.capture.custom_price}
               {$smarty.capture.custom_price nofilter}
             {else}
               {$product.price}
             {/if}
           </span>
+
           {block name='product_discount'}
             {if $product.has_discount}
               <span class="ml-2 price price--regular">{$product.regular_price} </span>
               <span class="product-miniature__discount"> {$product.discount_percentage} </span>
             {/if}
           {/block}
+          
           {hook h='displayProductPriceBlock' product=$product type="old_price"}
         </div>
 
