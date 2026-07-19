@@ -15789,13 +15789,26 @@ img.lazyload:not(.loaded) {
 }
 
 .catalog-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
   margin: 32px 0 16px;
+}
+.catalog-pagination .pagination-summary {
+  margin: 0;
+  color: #545454;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0;
 }
 .catalog-pagination__list {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   gap: 6px;
   margin: 0;
   padding: 0;
@@ -15803,7 +15816,6 @@ img.lazyload:not(.loaded) {
 }
 .catalog-pagination__item {
   display: flex;
-  flex: 0 0 auto;
 }
 .catalog-pagination__item.is-active .catalog-pagination__link {
   color: #fff;
@@ -15842,13 +15854,7 @@ img.lazyload:not(.loaded) {
   outline-offset: 2px;
 }
 .catalog-pagination__link--spacer {
-  color: #36585e;
-  background: #b8e1e7;
-}
-.catalog-pagination__link--spacer:hover, .catalog-pagination__link--spacer:focus {
-  color: #36585e;
-  background: #b8e1e7;
-  border-color: transparent;
+  pointer-events: none;
 }
 .catalog-pagination__item--previous .catalog-pagination__link, .catalog-pagination__item--next .catalog-pagination__link {
   width: auto;
@@ -15864,10 +15870,29 @@ img.lazyload:not(.loaded) {
   border-color: #7fbbc3;
 }
 .catalog-pagination__icon {
-  width: 20px;
-  height: 20px;
   font-size: 20px;
-  line-height: 20px;
+  line-height: 1;
+}
+@media (max-width: 1111px) {
+  .catalog-pagination {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+  .catalog-pagination .pagination-summary {
+    text-align: center;
+  }
+  .catalog-pagination__list {
+    justify-content: center;
+  }
+}
+@media (max-width: 806px) {
+  .catalog-pagination__link {
+    width: 35px;
+    height: 35px;
+    font-size: 15px;
+    border-radius: 8px;
+  }
 }
 @media (max-width: 575.98px) {
   .catalog-pagination {
@@ -15876,15 +15901,10 @@ img.lazyload:not(.loaded) {
   .catalog-pagination__list {
     gap: 5px;
   }
-  .catalog-pagination__link {
-    width: 40px;
-    height: 42px;
-    font-size: 15px;
-    border-radius: 8px;
-  }
   .catalog-pagination__item--previous .catalog-pagination__link, .catalog-pagination__item--next .catalog-pagination__link {
-    min-width: 42px;
-    padding: 0 10px;
+    width: 35px;
+    min-width: 35px;
+    padding: 0;
   }
   .catalog-pagination__item--previous .catalog-pagination__link > span:not(.material-icons), .catalog-pagination__item--next .catalog-pagination__link > span:not(.material-icons) {
     display: none;

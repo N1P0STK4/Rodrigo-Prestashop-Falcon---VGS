@@ -4,6 +4,19 @@
       class="catalog-pagination"
       aria-label="{l s='Pagination' d='Shop.Theme.Catalog'}"
     >
+
+      <p class="pagination-summary">
+        {l
+          s='Mostrando %from% - %to% de %total% artículos'
+          d='Shop.Theme.Catalog'
+          sprintf=[
+            '%from%' => $listing.pagination.items_shown_from,
+            '%to%' => $listing.pagination.items_shown_to,
+            '%total%' => $listing.pagination.total_items
+          ]
+        }
+      </p>
+
       <ul class="catalog-pagination__list">
         {foreach from=$pagination.pages item="page"}
           <li
