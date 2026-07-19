@@ -31,11 +31,11 @@
           file='catalog/_partials/miniatures/_partials/product-prices.tpl'
         }
 
-        {block name='product_form'}
+        {*{block name='product_form'}
           {include
             file='catalog/_partials/miniatures/_partials/product-form.tpl'
           }
-        {/block}
+        {/block}*}
       </div>
     </article>
   </div>

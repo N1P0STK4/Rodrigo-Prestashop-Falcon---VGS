@@ -125,6 +125,7 @@
 
         &__pricing {
             height: auto;
+            gap: 0px;
         }
 
         .price,
@@ -150,6 +151,12 @@
             font-size: 9px;
         }
     }
+}
+
+.search-result__products {
+  .product-miniature__pricing {
+    height: auto;
+  }
 }
 
 .product-flags {
