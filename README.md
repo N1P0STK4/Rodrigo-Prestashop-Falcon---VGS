@@ -4,6 +4,10 @@ Personalización de una tienda **PrestaShop 8** utilizando el tema **Falcon 3.1.
 
 El objetivo del proyecto ha sido adaptar la interfaz visual sin modificar el núcleo de PrestaShop y conservando las funcionalidades nativas del tema y de sus módulos.
 
+## Vídeo de demostracion
+
+- **Vídeo demostrativo:** [enlace del video](https://youtu.be/gEe2hyvv5E8)
+
 ## Contenido
 
 - [Características principales](#características-principales)
