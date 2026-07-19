@@ -1,22 +1,10 @@
-@use "sass:map";
-
-#category {
-  .container {
-    width: 100%;
-    max-width: 1310px;
-  }
+#category .container {
+  max-width: 1310px;
 }
 
 .category-filters {
-  $self: &;
-
   border: 1px solid #cfe3e8;
   border-radius: 8px;
-
-  @include media-breakpoint-down(sm) {
-    border: 0;
-    border-radius: 0;
-  }
 
   .icon-collapse {
     color: #328189;
@@ -26,14 +14,11 @@
       transform: rotate(270deg);
     }
 
-    &[aria-expanded="true"] {
-      .material-icons {
-        transform: rotate(180deg);
-      }
+    &[aria-expanded="true"] .material-icons {
+      transform: rotate(180deg);
     }
   }
 
-  // Shared card styles
   >.card,
   #search_filters {
     overflow: hidden;
@@ -56,7 +41,6 @@
         font-size: 20px;
         font-weight: 700;
         line-height: 1;
-        letter-spacing: 0;
         border-bottom: 1px solid #cfe3e8;
       }
     }
@@ -67,8 +51,7 @@
 
     .list-group-item {
       background-color: transparent;
-      border-right: 0;
-      border-left: 0;
+      border-inline: 0;
 
       &:first-child {
         border-top: 0;
@@ -80,26 +63,22 @@
     }
   }
 
-  // Category navigation
-  >.card {
-    .list-group-item {
-      padding: 8px 0;
-      border: 0;
-    }
+  >.card .list-group-item {
+    padding: 8px 0;
+    border: 0;
   }
 
-  // Faceted search filters
   #search_filters {
     >.card-header {
       position: relative;
 
       &::before {
-        content: "";
         position: absolute;
         top: 0;
         right: 18px;
         left: 18px;
         height: 1px;
+        content: "";
         background-color: #cfe3e8;
       }
     }
@@ -108,18 +87,12 @@
       padding: 16px 0;
     }
 
-    // Search filter elements
     .search-filters {
-      &__header {
-        margin-bottom: 0;
-      }
-
       &__title {
         color: #592bc7;
         font-size: 16px;
         font-weight: 600;
         line-height: 1;
-        letter-spacing: 0;
       }
 
       &__slider {
@@ -131,13 +104,8 @@
         border: 0;
         box-shadow: none;
       }
-    }
 
-
-
-    // Checkbox list spacing
-    .search-filters__collapse {
-      >div {
+      &__collapse>div {
         padding: 6px 0;
 
         &:first-child {
@@ -150,7 +118,6 @@
       }
     }
 
-    // Custom checkboxes
     .custom-control {
       display: flex;
       align-items: center;
@@ -163,11 +130,9 @@
       align-items: center;
       min-height: 20px;
       margin: 0;
-      color: #222222;
+      color: #222;
       font-size: 15px;
-      font-weight: 400;
       line-height: 20px;
-      letter-spacing: 0;
       cursor: pointer;
 
       &::before,
@@ -205,19 +170,13 @@
         }
       }
 
-      &:not(:checked)~.custom-control-label::before {
-        background-color: #f2f2f2;
-        border-color: #d9d9d9;
-      }
-
       &:focus~.custom-control-label::before {
         box-shadow: none;
       }
     }
 
-    // Price range
     .js-input-range-slider-container {
-      padding: 0 4px;
+      padding-inline: 4px;
     }
 
     .d-flex.mt-3 {
@@ -267,7 +226,7 @@
         }
 
         &:focus {
-          outline: none;
+          outline: 0;
           box-shadow: none;
         }
 
@@ -276,5 +235,10 @@
         }
       }
     }
+  }
+
+  @include media-breakpoint-down(sm) {
+    border: 0;
+    border-radius: 0;
   }
 }

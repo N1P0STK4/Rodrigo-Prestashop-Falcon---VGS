@@ -1,21 +1,13 @@
-@use "sass:map";
-
 .header-nav {
-  width: 100%;
   min-height: 29px;
-  padding: 0;
   overflow: hidden;
-
   color: #222222;
   font-size: 16px;
   font-weight: 600;
   line-height: 1.2;
-  letter-spacing: 0;
-
   background-color: #fbc83f;
 
   >.container {
-    width: 100%;
     max-width: 1310px;
   }
 
@@ -24,10 +16,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-
-    width: 100%;
     min-height: 29px;
-    margin: 0 auto;
   }
 
   &__contact,
@@ -38,8 +27,8 @@
 
   &__contact {
     display: flex;
-    align-items: center;
     flex: 0 1 auto;
+    align-items: center;
     gap: 4px;
   }
 
@@ -72,23 +61,25 @@
     line-height: 1.35;
 
     >.container {
-      padding-right: 12px;
-      padding-left: 12px;
+      padding-inline: 12px;
     }
 
     &__inner {
       flex-direction: column;
       justify-content: center;
       gap: 3px;
-      min-height: auto;
+      min-height: 0;
       text-align: center;
     }
 
     &__contact,
     &__shipping {
       width: 100%;
-      justify-content: center;
       text-align: center;
+    }
+
+    &__contact {
+      justify-content: center;
     }
   }
 
@@ -105,8 +96,7 @@
     font-size: 11px;
 
     >.container {
-      padding-right: 8px;
-      padding-left: 8px;
+      padding-inline: 8px;
     }
   }
 }
